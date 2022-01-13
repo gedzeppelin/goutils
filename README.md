@@ -1,2 +1,1 @@
-# go-pulumi-utils
-Pulumi SDK utils for go
+# Pulumi SDK utils
