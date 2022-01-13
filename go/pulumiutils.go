@@ -1,4 +1,4 @@
-package pulumi
+package pulumiutils
 
 import (
 	"fmt"
