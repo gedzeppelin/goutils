@@ -1,4 +1,4 @@
-module github.com/gedzeppelin/goutils/pulumi
+module github.com/gedzeppelin/goutils/pulumiutils
 
 go 1.14
 
