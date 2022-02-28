@@ -25,19 +25,12 @@ func ProjectStackNamer(pulumiCtx *pulumi.Context) func(name string) string {
 	return func(name string) string {
 		return fmt.Sprintf("%s/%s/%s", acc, name, stack)
 	}
-
 }
 
 func ResourceStackNamer(ctx *pulumi.Context) func(name string) string {
 	stack := ctx.Stack()
 
-	if stack == "main" {
-		return func(name string) string {
-			return name
-		}
-	} else {
-		return func(name string) string {
-			return fmt.Sprintf("%s-%s", name, ctx.Stack())
-		}
+	return func(name string) string {
+		return fmt.Sprintf("%s-%s", name, stack)
 	}
 }
