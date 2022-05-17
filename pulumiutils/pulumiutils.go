@@ -8,7 +8,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-func ProjectStackNamer(pulumiCtx *pulumi.Context) func(name string) string {
+func ProjectStackNamer(pulumiCtx *pulumi.Context) (proj func(name string) string) {
 	ctx := context.Background()
 	stack := pulumiCtx.Stack()
 
@@ -27,10 +27,17 @@ func ProjectStackNamer(pulumiCtx *pulumi.Context) func(name string) string {
 	}
 }
 
-func ResourceStackNamer(ctx *pulumi.Context) func(name string) string {
+func ResourceStackNamer(ctx *pulumi.Context) (res func(name string) string, resp func(name string) pulumi.String) {
 	stack := ctx.Stack()
 
-	return func(name string) string {
+	_res := func(name string) string {
 		return fmt.Sprintf("%s-%s", name, stack)
 	}
+
+	_resp := func(name string) pulumi.String {
+		res := fmt.Sprintf("%s-%s", name, stack)
+		return pulumi.String(res)
+	}
+
+	return _res, _resp
 }
